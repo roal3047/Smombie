@@ -1,0 +1,91 @@
+<html lang="ko">
+
+    {% load static %}
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--Fontawesom-->
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+        <!--Animated CSS-->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+
+        <!-- Bootstrap -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <!--Bootstrap Carousel-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/carousel.css' %}" />
+
+        <link rel="stylesheet" href="{% static 'css/isotope/style.css' %}">
+
+        <!--Main Stylesheet-->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <!--Responsive Framework-->
+        <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+      <script src="{% static 'js/Sortable.js' %}"></script>
+      <script src="{% static 'js/app.js' %}"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+		<style type="text/css">
+            #container {
+                min-width: 310px;
+                max-width: 800px;
+                height: 400px;
+                margin: 0 auto
+            }
+            input[type=text] {
+              width: 100%;
+              padding: 12px 20px;
+              margin: 8px 0;
+              box-sizing: border-box;
+            }
+
+            .list-group-item{
+                width : 40%;
+            }
+		</style>
+
+
+    <title>업무 관리</title>
+    </head>
+    <body>
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#"></a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Work List</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>회원가입</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>로그인</a></li>
+          </ul>
+        </div>
+      </nav>
+     {% block main %}
+
+    
+      <div class="col-md-12">
+        <div class="container">
+          <div id="example1" class="list-group col">
+              {% for list in SmombieDb_work %}
+              <div class="list-group-item">
+                <input type="checkbox" name={{list.title}} value={{list.title}}>{{ list.title }}
+              </div>
+              
+              {% endfor %}
+              {% endblock main %} 
+                <button type="button" class="btn btn-primary"
+                   onclick="location.href='{% url 'work:work_insert' %}'">
+                   업무추가
+                </button>
+            </div>
+        </div>  
+      </div>
+    </body>
+  </head>
+</html>

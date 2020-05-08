@@ -1,0 +1,213 @@
+
+<!doctype html>
+<html lang="ko">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- 부트스트랩 CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=u34gNcJzVg_ChXm76Fx0&submodules=geocoder"></script>
+
+
+ <title>smombie</title>
+  <link rel="icon" href="img/logo.jpg">
+
+  <style>
+	@media screen and (max-width:600px){
+		body{
+			background:pink;
+		}
+	}
+	body{
+		background:white;
+		max-width:600px;
+		margin:0 auto;
+	}
+	#top{z-index:9999;width:100%;height:45px;background:white;position:fixed;max-width:600px;min-width:350px;border-bottom:1px solid #E6E6E6;}
+	#top .row .top_icon{text-align:center;float:left;margin-top:5px;}
+	#top .row .top_icon.category{padding-left:20px;}
+	#top .row .top_icon.user{padding-right:20px;}
+
+	#footer{width:100%;height:100px;background:white;padding:20px 30px;text-align:center;}
+
+  #container{background:white;padding-top:68px;}
+  #getmap{margin:20px 0px;text-align: right;padding-right:3%;}
+  #getmap input{height:32px;padding:0px 7%;border:1px solid #ec6762;border-radius: 2px;}
+  #getmap button{background: #ec6762;padding: 5px 5%;border: 1px solid #ec6762;border-radius: 2px;color: white;}
+
+	#bar_menu{opacity:1;position:absolute;left:0px;top: 35px;background: #ffffff;max-width:80px;z-index: 9999;}
+	#bar_menu .box{text-align:center;padding:25% 0;border-left:5px solid #ffffff;}
+	#bar_menu .box.on{border-left:5px solid #ec6762;}
+	#bar_menu .img img{width:40%;}
+	#bar_menu a{text-decoration:none !important;}
+	#bar_menu .box .text{color:#9e9b9f;font-size:8pt;margin-top:5px;}
+	#bar_menu .box .text.on{color:#ec6762;}
+	#bar_menu.on{opacity:0;}
+
+	#footer{padding-bottom:150px;}
+
+	#bottom_menu{opacity:0;max-width:600px;min-width:350px;position:fixed !important;z-index: 9999;background: white;height: 50px;width:100%;bottom: 0px;}
+	#bottom_menu .bottom_box{width:25%;text-align:center;}
+	#bottom_menu .bottom_box .img{margin-top:3px;height:25px;}
+	#bottom_menu .bottom_box .img img{width:20px;}
+	#bottom_menu .bottom_box .text{color:#9e9b9f;font-size:8pt;margin-top:5px;}
+	#bottom_menu .bottom_box .text.on{color:#ec6762;}
+	#bottom_menu.on{opacity:1;}
+	
+  #go_top{z-index: 99999;position: fixed;bottom:12%;}
+	.menu a{cursor:pointer;}
+	.menu .hide{display:none;}
+
+
+  </style>
+ </head>
+ <body>
+	<!-- 네비게이션 메뉴 -->
+	<div id="top" class="container-fluid">
+		<div class="row">
+			<div class="top_icon category col-xs-2">
+				<ul>
+					<li class="menu">
+				<a><img src="http://jjeun.com/smombie/img/category.png" id="category" style="width:25px;padding-top:3px;"></a>
+				<ul class="hide">
+					<li><a href="{% url 'chat_index' %}">채팅</a></li>
+					</ul>
+					</li>
+					</ul>
+				<div id="bar_menu" class="on">
+					<a href="#">
+						<div class="box" style="margin-top:30px;">
+							<div class="img"><img src="http://jjeun.com/smombie/img/glass.png"></div>
+						</div>
+
+						<script>
+							// html dom 이 다 로딩된 후 실행된다.
+							$(document).ready(function(){
+									// memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+									$(".menu>a").click(function(){
+											// 현재 클릭한 태그가 a 이기 때문에
+											// a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+											$(this).next("ul").toggleClass("hide");
+									});
+							});
+					</script>
+					
+					
+					
+				
+					<a href="#">
+						<div class="box">
+							<div class="img"><img src="http://jjeun.com/ciguide/img/map.png"></div>
+							<div class="text">MAP</div>
+						</div>
+					</a>
+					<a href="/tabacco/tabacco_list.html">
+						<div class="box">
+							<div class="img"><img src="http://jjeun.com/ciguide/img/ci.png"></div>
+							<div class="text">INFO</div>
+						</div>
+					</a>
+
+					<div style="background:#ffffff;height:200px;">
+					</div>
+				</div>
+			</div>
+			<div class="top_icon logo col-xs-8">
+				<a href="./">
+					<img src="http://jjeun.com/smombie/img/long_logo.png" style="width:113px;">
+				</a>
+			</div>
+			<div class="top_icon user col-xs-2">
+				<img src="http://jjeun.com/smombie/img/glass.PNG" style="width:25px;padding-top:3px;">
+      
+			</div>
+		</div>
+	</div>
+
+<style>
+	#parti .title{text-align:left;font-weight:bold;margin-left:20px;margin-bottom:10px;}
+	#parti .box{width:100%;text-align:center;}
+	#parti .line{width:90%;}
+	#parti .left{width: 47%;float: left;background: #5593e6;border-radius: 7px;margin-bottom: 10px;padding: 20px 0px;color: white;text-align: left;padding-left: 30px;margin-left:1.5%;margin-right:1.5%;margin-top:20px;height:150px;}
+	#parti .right{width: 47%;float: left;background: #e96165;border-radius: 7px;margin-bottom: 10px;padding: 20px 0px;color: white;text-align: left;padding-left: 30px;margin-left:1.5%;margin-right:1.5%;margin-top:20px;height:150px;}
+</style>
+	<!-- 메인 내용 -->
+	<div id="container" class="">
+		<div class="img" style="margin-bottom:20px; text-align:center;"><img src="http://jjeun.com/smombie/img/banner.png" style="width:100%;"></div>
+		
+		<div id="parti">
+			<div class="title">참여중</div>
+			<div class="box">
+				<div clas="line">
+					<div class="left">
+						<div class="name">'doogi' 업무공유방</div>
+						<div class="number">2명 참여중</div>
+					</div>
+					<div class="right">
+						<div class="name">1:1 공유방</div>
+						<div class="number">2명 참여중</div>
+					</div>
+				</div>
+			</div>
+				<div class="box">
+				<div clas="line">
+					<div class="left">
+						<div class="name">'doogi' 업무공유방</div>
+						<div class="number">2명 참여중</div>
+					</div>
+					<div class="right">
+						<div class="name">1:1 공유방</div>
+						<div class="number">2명 참여중</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 푸터 -->
+	<div id="footer">
+		<div>
+			<img src="http://jjeun.com/smombie/img/logo.jpg" style="text-align:center;width:20px;">
+		</div>
+		<span style="color:white;font-size:7pt;color:gray;">Team.조기퇴근<br><span style="color:#b7b7b7;">copyright2020CIGUIDE all righs reserved.</span></span>
+		<div style="height:50px;"></div>
+	</div>
+	<!-- 하단 메뉴 -->
+	<div id="bottom_menu" class="on">
+		<div class="row">
+			<a href="#">
+				<div class="bottom_box col-xs-3">
+					<div class="img" style="cursor: pointer;" onclick="location.href='file.js'"><img src="http://jjeun.com/smombie/img/file.PNG"></div>
+					<div class="text">파일</div>
+				</div>
+			</a>
+			<a href="#">
+				<div class="bottom_box col-xs-3">
+					<div class="img" style="cursor: pointer;" onclick="location.href='image.js'"><img src="http://jjeun.com/smombie/img/image.PNG"></div>
+					<div class="text">이미지</div>
+				</div>
+			</a>
+			<!-- <a href="{% url 'chat_index' %}">채팅</a> -->
+			<a href="#">
+				<div class="bottom_box col-xs-3">
+					<div class="img"><a href="{% url 'work' %}"><img src="http://jjeun.com/smombie/img/check.PNG"></a></div>
+					<div class="text">업무</div>
+				</div>
+			</a>
+			<a href="#">
+				<div class="bottom_box col-xs-3">
+					<div class="img" style="cursor: pointer;" onclick="location.href='cal.js'"><img src="http://jjeun.com/smombie/img/sche.PNG"></div>
+					<div class="text">일정</div>
+				</div>
+			</a>
+		</div>f
+	</div>
+	</html>
